@@ -1,9 +1,5 @@
-from math import fabs
 
 class Point:
-
-
-    EPS = 0.00001
 
     def __init__(self, x, y):
         self.x = x
@@ -20,7 +16,12 @@ class Point:
         my = (p1.y + p2.y) / 2
         return Point(mx, my)
 
-    def slope_from_origin(self):
-        return self.y/self.x
+    def get_line_to(self, other=None):
+        if other is None:
+            other = Point(0, 0)
+        a = (self.y - other.y)/(self.x - other.x)
+        b = self.y - a*self.x
+
+        return a, b
 
 
