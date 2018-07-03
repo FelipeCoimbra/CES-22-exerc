@@ -2,7 +2,7 @@
     AbstractFactory: A way of descentralizing object creation to proper factories
     while
 '''
-from structures.polygon import Polygon, PolygonFactory
+from structures.polygon_factory import PolygonFactory
 
 class AbstractFactory:
 

@@ -8,11 +8,7 @@ class PolygonAreaAlgBridge(ABC):
         This class decouples implementation of the area algorithm
     '''
     def __init__(self, polygon=None):
-        self.polygon = polygon
-
-    @abstractmethod
-    def bind(self, new_polygon):
-        self.polygon = new_polygon
+        self._polygon = polygon
 
     @abstractmethod
     def execute(self):
@@ -26,9 +22,9 @@ class OnlyTriangleAreaAlg(PolygonAreaAlgBridge):
         super(OnlyTriangleAreaAlg, self).__init__(polygon)
 
     def execute(self):
-        v1 = self.polygon.vlist[0]
-        v2 = self.polygon.vlist[1]
-        v3 = self.polygon.vlist[2]
+        v1 = self._polygon.vlist[0]
+        v2 = self._polygon.vlist[1]
+        v3 = self._polygon.vlist[2]
         l1 = (v2[0]-v1[0], v2[1]-v1[1])
         l2 = (v3[0]-v1[0], v3[1]-v1[1])
         cross = (0, 0, l1[0]*l2[1]-l1[1]*l2[0])
@@ -43,7 +39,7 @@ class GeneralAreaAlg(PolygonAreaAlgBridge):
         super(GeneralAreaAlg, self).__init__(polygon)
 
     def execute(self):
-        vertices = self.polygon.vlist
+        vertices = self._polygon.vlist
         area = 0.0
         for i in range(0, len(vertices)-3):
             area += self.__calc_triang_area(vertices[i], vertices[i+1], vertices[i+2])
@@ -56,16 +52,17 @@ class GeneralAreaAlg(PolygonAreaAlgBridge):
         area = sqrt(cross[0]**2 + cross[1]**2 + cross[2]**2)/2
         return area
 
-# Making us some pretty triangle
-poly = Polygon([(0,0), (0.866, 0.5), (1,0)])
+if __name__ == "__main__":
+    # Making us some pretty triangle
+    poly = Polygon([(0,0), (0.866, 0.5), (1,0)])
 
-# Wanna know its area. Bridge will call specific area function
-poly.set_areaAlg(OnlyTriangleAreaAlg(poly))
-print(poly.area())
+    # Wanna know its area. Bridge will call specific area function
+    poly.set_areaAlg(OnlyTriangleAreaAlg(poly))
+    print(poly.area())
 
-# Now it's some messed up non-convex polygon. Ouch
-poly = Polygon([(0,0), (1,0), (2,1), (3,4), (3,5), (2,2), (1,2), (0,0)])
+    # Now it's some messed up non-convex polygon. Ouch
+    poly = Polygon([(0,0), (1,0), (2,1), (3,4), (3,5), (2,2), (1,2), (0,0)])
 
-# Need new algorithm for that
-poly.set_areaAlg(GeneralAreaAlg(poly))
-print(poly.area())
+    # Need new algorithm for that
+    poly.set_areaAlg(GeneralAreaAlg(poly))
+    print(poly.area())
