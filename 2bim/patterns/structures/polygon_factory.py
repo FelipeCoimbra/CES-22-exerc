@@ -1,4 +1,5 @@
-from polygon import Polygon
+from abc import ABC, abstractmethod
+from structures.polygon import Polygon
 
 class BaseFactory(ABC):
 
