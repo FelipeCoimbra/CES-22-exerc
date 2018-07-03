@@ -44,13 +44,3 @@ para que seja rápido e fácil de adicionar e organizar conteúdo: novos membros
 alterar nenhuma linha de código do site para por novos tutoriais, basta fazer upload desse
 novo material, atualizar o repositório do site e fazer um novo deploy.
 '''
-
-Aula 12
-
-1) Desenvolver uma aplicação Flask usando cookies.
-
-2) Desenvolver uma aplicação Flask usando sessões.
-
-3) Desenvolva uma aplicação que permita carregar
-arquivos em um servidor, listar e acessar arquivos no
-servidor.
