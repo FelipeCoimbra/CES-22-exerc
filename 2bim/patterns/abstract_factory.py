@@ -2,7 +2,7 @@
     AbstractFactory: A way of descentralizing object creation to proper factories
     while
 '''
-from structures.polygon import Polygon
+from structures.polygon import Polygon, PolygonFactory
 
 class AbstractFactory:
 
@@ -13,16 +13,16 @@ class AbstractFactory:
         self.factories[key] = factory
 
     def getFactory(self, key):
-        return self.factories.find(key)
+        return self.factories.get(key)
 
     def create(self, key, *args):
-        factory = self.factories.find(key)
+        factory = self.factories.get(key)
         if factory is None:
             return None
         return factory.create(args)
 
 creator = AbstractFactory()
-creator.registerFactory("polygon", Polygon.PolygonFactory(args))
+creator.registerFactory("polygon", PolygonFactory())
 
 # Two ways of creating polygon instances from factory
 # 1) Directly ask an object passing proper args to the common interface

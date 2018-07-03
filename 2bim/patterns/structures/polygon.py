@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 class Polygon:
     '''
         Class for a 2D Polygon. A n-agon is constructed from a vector list with
@@ -19,7 +20,16 @@ class Polygon:
     def set_areaAlg(self, alg):
         self.areaAlgoBridge = alg
 
-class PolygonFactory:
+class BaseFactory(ABC):
+
+    def __init__(self):
+        pass
+
+    @abstractmethod
+    def create(self):
+        pass
+
+class PolygonFactory(BaseFactory):
     '''
         Class for a 2D Polygon Factory. You may create polygons from lists
         of tuples or directly from tuples
@@ -39,7 +49,7 @@ class PolygonFactory:
             vertices.append(arg)
         if not self.__validate_vlist(vertices):
             raise ValueError()
-        return vertices
+        return Polygon(vertices)
 
     def create(self, *args):
         return self.from_tuples(args)
