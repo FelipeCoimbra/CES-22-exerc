@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chat.css') }}" />
+
+</head>
+
+<body>
+    <div id="root">
+        <div id="chatwindow">
+            <div id="chattitle">
+                <p>CHAT</p>
+            </div>
+            <div id="chatcontentwrapper" >
+
+            </div>
+            <div class="messagebox">
+                <form action="/" method="POST">
+                    <div class="messagebox username">
+                        <input type="text" class="username" placeholder="Type your User Name" size="20" />
+                    </div>
+                    <div class="messagebox message">
+                        <input type="text" class="message" placeholder="Write your message!" size="80" maxlength="300" />
+                    </div>
+                    <div class="messagebox submit" >
+                        <input type="submit" class="submit" class="messagebox submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+
+</html>
